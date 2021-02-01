@@ -11,6 +11,8 @@ plugins {
     id 'application'
 }
 
+def mainClass = 'patientintake.ClinicMain'
+
 repositories {
     // Use JCenter for resolving dependencies.
     jcenter()
@@ -26,10 +28,18 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass = 'patientintake.ClinicMain'
+    mainClass = mainClass
 }
 
 tasks.named('test') {
     // Use junit platform for unit tests.
     useJUnitPlatform()
+}
+
+tasks.named('jar') {
+    manifest {
+        attributes(
+            'Main-Class': mainClass
+        )
+    }
 }
